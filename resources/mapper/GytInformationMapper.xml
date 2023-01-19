@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.GytInformationMapper">
+    <select id="view" resultType="hospital">
+        SELECT * FROM tb_natmeha_hospital
+    </select>
+
+    <insert id="insertInformation" parameterType="hospital">
+        INSERT INTO hospi VALUES(#{hospital_name},#{hospital_phone})
+    </insert>
+
+    <update id="updateInformation" parameterType="hospital">
+        UPDATE hospi
+        <set>
+            <if test="hospital_name.length() != 0">
+                `HOSPITAL_NAME`=#{hospital_name},
+            </if>
+            <if test="hospital_phone.length() != 0">
+                `HOSPITAL_PHONE`=#{hospital_phone}
+            </if>
+        </set>
+        WHERE HOSPITAL_NAME=#{hospital_name}
+    </update>
+</mapper>
